@@ -17,9 +17,10 @@ int GetElem(List *L,ElemType e);
 int GetLength(List *L);
 bool IsEmpty(List *L);
 bool IsFull(List *L); 
+
 void InitList(List **L){
 	(*L) =(List *)malloc(sizeof(List));
-	if(L!=NULL){
+	if((*L)!=NULL){
 		(*L)->length=0;	
 	}else{
 		exit(0);
@@ -47,6 +48,7 @@ void DeleteList(List *L,ElemType e){
 			L->length--;
 		}
 	}
+}
 /*
 	查找值为e的位置
 	@Param：L：待查找的线性表 ；e：查找值  ； 
