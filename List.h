@@ -68,7 +68,8 @@ int FindList(List *L,ElemType e){
 	}
 	
 } 
-int GetElem(List *L,ElemType e);
+//带以后调用排序算法后完成 
+int GetElem(List *L,ElemType e); 
 int GetLength(List *L){
 	return L->length;	
 }
