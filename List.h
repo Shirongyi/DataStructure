@@ -12,7 +12,7 @@ List* InitList();
 void DestroyList(List **L);
 void InsertList(List *L,ElemType e);
 void DeleteList(List *L,ElemType e);
-int FindList(List *L,ElemType e);
+int FindElem(List *L,ElemType e);
 int GetElem(List *L,ElemType e);
 int GetLength(List *L);
 bool IsEmpty(List *L);
@@ -28,7 +28,6 @@ List* InitList(){
 	}	
 }
 void DestroyList(List **L){
-	printf("%p\n",**L);
 	free(L);
 }
 void InsertList(List *L,ElemType e){
@@ -42,7 +41,7 @@ void InsertList(List *L,ElemType e){
 }
 void DeleteList(List *L,ElemType e){
 	if(!IsEmpty(L)){
-		int num=FindList(L,e);
+		int num=FindElem(L,e);
 		int i;
 		if(num!=0){//若num=0则表示，该在不存在线性表中不存在 
 		if(num==L->length){
@@ -65,7 +64,7 @@ void DeleteList(List *L,ElemType e){
 	@Param：L：待查找的线性表 ；e：查找值  ； 
 	@return： e在线性表中最先匹配的值的序号（从1开始），若存在返回其序号，否则返回0； 
 */
-int FindList(List *L,ElemType e){
+int FindElem(List *L,ElemType e){
 	int i;
 	for(i=0;i<L->length;i++){
 		if(e==L->data[i]){
