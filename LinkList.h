@@ -9,21 +9,22 @@ typedef struct LinkNode{
 }LinkList;
 
 LinkList* CreateLinkNode(ElemType e);
-void InitLinkList(LinkList **L);
+LinkList* InitLinkList();
 void DestroyLinkList(LinkList **L);
-void InsertList(LinkList **L,ElemType e);
-void DeleteList(LinkList *L,ElemType e);
+void InsertElem(LinkList **L,ElemType e);
+void DeleteElem(LinkList **L,ElemType e);
 LinkList* FindElem(LinkList *L,ElemType e);
 LinkList* GetElem(LinkList *L,ElemType e);
 int GetLength(LinkList *L);
 bool IsEmpty(LinkList *L);
+void PrintLinkList(LinkList *L);
 
-
-void InitLinkList(LinkList **L){
-	(*L)=(LinkList *)malloc(sizeof(LinkList));
-	if((*L)!=NULL){
-		(*L)->next=*L;
-		(*L)->prior=*L; 
+LinkList* InitLinkList(){
+	LinkList* L=(LinkList *)malloc(sizeof(LinkList));
+	if(L!=NULL){
+		L->next=L;
+		L->prior=L;
+		return L; 
 	}else{
 		exit(0); 
 	}
@@ -53,7 +54,7 @@ LinkList* CreateLinkNode(ElemType e){
 /*
 	尾插法 
 */
-void InsertLinkList(LinkList **L,ElemType e){
+void InsertElem(LinkList **L,ElemType e){
 	LinkList* rear=(*L);
 	while(rear->next!=*L){
 		rear=rear->next;
@@ -65,12 +66,16 @@ void InsertLinkList(LinkList **L,ElemType e){
 	(*L)->prior=s;
 	rear=s;	
 }
-void DeleteLinkList(LinkList *L,ElemType e){ 
-	LinkList *p=FindElem(L,e);//查找元素e的地址 
-	if(p!=L){
-		p->prior->next = p->next; 
-		p->next->prior = p->prior;
-		free(p);
+void DeleteElem(LinkList **L,ElemType e){ 
+	if(!IsEmpty(*L)){
+		LinkList *p=FindElem(*L,e);//查找元素e的地址 
+		if(p!=*L){
+			p->prior->next = p->next; 
+			p->next->prior = p->prior;
+			free(p);
+		}	
+	}else{
+		printf("表空\n");
 	}
 }
 /*
@@ -106,4 +111,11 @@ bool IsEmpty(LinkList *L){
 		return false; 
 	} 
 }
- 
+void PrintLinkList(LinkList *L){
+	LinkList *p=L;
+	while(p->next!=L){
+		p=p->next;
+		printf("%d ",p->data);
+	}
+	printf("\n");
+}
