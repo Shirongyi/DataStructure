@@ -52,9 +52,14 @@
 > 函数名；IsEmpty(LinkList *L)
 > @param:L：待判定的链表
 > return:表空返回true，表不空返回false
+* 创建结点
+> CreateLinkNode(ElemType e)
+> @param:e:待创建结点的值
+> @return: 指向新创建的结点的指针(地址)
 * 打印链表
 > PrintLinkList(LinkList *L)
 > @param:待打印的链表OA
+
 ### 顺序栈（通过线性表实现的栈）
 ### 顺序队（通过线性表实现的队列）
 ## 树形结构
