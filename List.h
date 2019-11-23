@@ -8,7 +8,7 @@ typedef struct List{
 	int length;
 }List;
 
-List* InitList(List *L);
+List* InitList();
 void DestroyList(List **L);
 void InsertList(List *L,ElemType e);
 void DeleteList(List *L,ElemType e);
@@ -18,8 +18,8 @@ int GetLength(List *L);
 bool IsEmpty(List *L);
 bool IsFull(List *L); 
 
-List* InitList(List *L){
-	L =(List *)malloc(sizeof(List));
+List* InitList(){
+	List* L =(List *)malloc(sizeof(List));
 	if(L!=NULL){
 		L->length=0;	
 		return L;
