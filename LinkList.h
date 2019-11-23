@@ -112,10 +112,13 @@ bool IsEmpty(LinkList *L){
 	} 
 }
 void PrintLinkList(LinkList *L){
-	LinkList *p=L;
-	while(p->next!=L){
-		p=p->next;
-		printf("%d ",p->data);
+	if(L){
+		LinkList *p=L;
+		while(p->next!=L){
+			p=p->next;
+			printf("%d ",p->data);
+		}
+		printf("\n");	
 	}
-	printf("\n");
+	
 }
