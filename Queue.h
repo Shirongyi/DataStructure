@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #define SIZE 5 //定义队列的大小
 #define ElemType int //定义进队、的元素类型
@@ -7,17 +8,25 @@ typedef struct Queue{
 	int front,rear;
 }Queue;
 
-void InitQueue(Queue *q);
+Queue* InitQueue();
 bool EnQueue(Queue *q,ElemType e);
 bool DeQueue(Queue *q,ElemType *e);
 int GetTop(Queue *q,ElemType *e);
 int GetLength(Queue *q);
 bool IsEmpty(Queue *q);
 bool IsFull(Queue *q); 
-
-void InitQueue(Queue *q){
-	q->front=0;
-	q->rear=0;
+void PrintQueue(Queue *q);
+Queue* InitQueue(){
+	Queue *q=(Queue *)malloc(sizeof(Queue));
+	if(q!=NULL){
+		q->front=0;
+		q->rear=0;	
+		return q;
+	}else{
+		printf("Queue 申请空间失败\n");
+		exit(0); 
+	} 
+	
 }
 bool EnQueue(Queue *q,ElemType e){
 	if(!IsFull(q)){
@@ -31,7 +40,8 @@ bool EnQueue(Queue *q,ElemType e){
 }
 bool DeQueue(Queue *q,ElemType *e){
 	if(!IsEmpty(q)){
-		*e=q->data[q->front++];
+		*e=q->data[q->front];
+		q->front=(q->front+1)%SIZE;
 		return true;
 	}else{
 		printf("队空\n");
@@ -55,4 +65,13 @@ bool IsFull(Queue *q){
 	}else{
 		return false;
 	}
+}
+void PrintQueue(Queue *q){
+	int i;
+	int count=GetLength(q);
+	printf("队列：");
+	for(i=q->front;count--;i++){
+		printf("%d ",q->data[i]);
+	}
+	printf("\n");
 } 
