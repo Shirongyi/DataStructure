@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define SIZE 10
+#define SIZE 5
 #define ElemType int 
 typedef struct List{
 	ElemType data[SIZE];
 	int length;
 }List;
 
-void InitList(List **L);
+List* InitList(List *L);
 void DestroyList(List **L);
 void InsertList(List *L,ElemType e);
 void DeleteList(List *L,ElemType e);
@@ -18,10 +18,11 @@ int GetLength(List *L);
 bool IsEmpty(List *L);
 bool IsFull(List *L); 
 
-void InitList(List **L){
-	(*L) =(List *)malloc(sizeof(List));
-	if((*L)!=NULL){
-		(*L)->length=0;	
+List* InitList(List *L){
+	L =(List *)malloc(sizeof(List));
+	if(L!=NULL){
+		L->length=0;	
+		return L;
 	}else{
 		exit(0);
 	}	
@@ -31,23 +32,33 @@ void DestroyList(List **L){
 	free(L);
 }
 void InsertList(List *L,ElemType e){
-	*(L->data+GetLength(L))=e;
-	L->length++; 
+	if(!IsFull(L)){
+		*(L->data+GetLength(L))=e;
+		L->length++;
+	}else{
+		printf("表满\n");
+	}
+	 
 }
 void DeleteList(List *L,ElemType e){
-	int num=FindList(L,e);
-	int i;
-	if(num!=0){//若num=0则表示，该在不存在线性表中不存在 
+	if(!IsEmpty(L)){
+		int num=FindList(L,e);
+		int i;
+		if(num!=0){//若num=0则表示，该在不存在线性表中不存在 
 		if(num==L->length){
-			L->length--;
-		}else{
-			int index=num-1;
-			for(i=index;i<L->length;i++){
-				L->data[i]=L->data[i+1];
+				L->length--;
+			}else{
+				int index=num-1;
+				for(i=index;i<L->length;i++){
+					L->data[i]=L->data[i+1];
+				}
+				L->length--;
 			}
-			L->length--;
 		}
+	}else{
+		printf("表空\n");
 	}
+	
 }
 /*
 	查找值为e的位置
@@ -66,7 +77,6 @@ int FindList(List *L,ElemType e){
 	} else{
 		return 0;
 	}
-	
 } 
 //带以后调用排序算法后完成 
 int GetElem(List *L,ElemType e); 
