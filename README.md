@@ -21,6 +21,12 @@
 > 函数名：FindElem(List *L,ElemType e)
 > @param:L:待查找的线性表；e：待查找的值
 > @return：若存在返回其所在线性表的序号(从1开始)，否则返回0
+* 判表空
+> 函数名:IsEmpty(List *L)
+> @param:L:待判断的线性表
+* 判表满
+> 函数名：IsFull(List *L)
+> @param:L:待判断的线性表
 ### 双向循环链表(inlcude “LinkList.h”)
 * 初始化链表
 > 函数名：InitLinkList()
